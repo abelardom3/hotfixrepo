@@ -99,6 +99,7 @@ backButton.className = 'backBtn'
 buttonEvent()
 
 
+// when button is clicked getUsers will invoke 
 function buttonEvent() {
     const getBtn = document.getElementById("btn")
     getBtn.addEventListener('click', getUsers)
@@ -106,12 +107,14 @@ function buttonEvent() {
 
 }
 
+// function will acquire data from the API
 function getUsers() {
     $.get("https://jsonplaceholder.typicode.com/users", logUsers)
 
 }
 
-
+// function will grab that data and pass it in 
+// then we will loop through the array of objects, to get to each indiviual object
 function logUsers(userInfo) {
     for (var i = 0; i < userInfo.length; i++) {
         const currentUser = userInfo[i]
@@ -122,6 +125,8 @@ function logUsers(userInfo) {
 
 }
 
+//function will then take the indiviual object and at the same time create 'div's 
+// those div's will contain object values that we choose 
 function createDiv(object) {
     container.classList = "users"
     const currentUserDiv = document.createElement('div')
@@ -132,7 +137,7 @@ function createDiv(object) {
     clickId(object.id)
 
 }
-
+// this function will run when a target id is clicked that will replace the last word of the url with the target id string 
 function clickId(id) {
     const idUser = document.getElementById(id)
     idUser.addEventListener('click', function (e) {
@@ -145,7 +150,7 @@ function clickId(id) {
 
 }
 
-
+// function will then get the post data for that certain user and loop through the array to get to the object
 function getPost(postData) {
     for (var i = 0; i < postData.length; i++) {
         var userPost = postData[i]
@@ -154,6 +159,7 @@ function getPost(postData) {
 
 }
 
+// function then will create 'div's for each post and append to the post container
 function createDivPost(userPost) {
     const postDiv = document.createElement("div")
     postDiv.className = "postPage"
@@ -163,9 +169,11 @@ function createDivPost(userPost) {
     showContainer()
 }
 
+// function then will append the back button and show the post container 
 function showContainer() {
     $(containerPost).before(backButton)
     backButton.innerText = "Go back"
+    //when back button is clicked it will show the orginal container and invoke hidePost
     backButton.addEventListener('click', () => {
         $(container).show()
         hidePost()
@@ -174,6 +182,7 @@ function showContainer() {
 
 }
 
+// function the will 
 function hidePost() {
     $(containerPost).hide()
     $(containerPost).empty()
